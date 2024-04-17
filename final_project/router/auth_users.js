@@ -28,7 +28,7 @@ regd_users.post("/login", (req,res) => {
     const {username, password} = req.body
 
     if (!username || !password)
-        return res.send("You must provide a username and a password to login")
+        return res.status(404).send("You must provide a username and a password to login")
 
     if (authenticatedUser(username, password)){
         const accessToken  = jwt.sign({
@@ -38,10 +38,10 @@ regd_users.post("/login", (req,res) => {
         req.session.authorization = {
             accessToken, username
         }
-        return res.send("User logged successfully")
+        return res.status(200).send("User logged successfully")
     }
 
-    return res.send("Your credentials couldn't login")
+    return res.status(208).send("Your credentials couldn't login")
 });
 
 // Add a book review
@@ -54,6 +54,9 @@ regd_users.put("/auth/review/:isbn", (req, res) => {
 
   if (!currentBook)
         return res.send(404).json({message: "Book not found"})
+
+  if (!review)
+        return res.send("You need to provide a review")
 
     currentBook.reviews[username] = review
     res.send("Your review was published successfully")
