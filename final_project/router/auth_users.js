@@ -6,17 +6,26 @@ const regd_users = express.Router();
 let users = [];
 
 const isValid = (username)=>{ //returns boolean
-//write code to check is the username is valid
+    const foundUsername = users.find( u => u.username===username)
+
+    if (foundUsername)
+        return true
+
+    return false
 }
 
 const authenticatedUser = (username,password)=>{ //returns boolean
-//write code to check if username and password match the one we have in records.
+    const foundUser = users.find( u => u.username===username && u.password === password)
+
+    if (foundUser)
+        return true
+
+    return false
 }
 
 //only registered users can login
 regd_users.post("/login", (req,res) => {
-  //Write your code here
-  return res.status(300).json({message: "Yet to be implemented"});
+  
 });
 
 // Add a book review
