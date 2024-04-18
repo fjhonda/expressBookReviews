@@ -59,7 +59,7 @@ regd_users.put("/auth/review/:isbn", (req, res) => {
         return res.send("You need to provide a review")
 
     currentBook.reviews[username] = review
-    res.send("Your review was published successfully")
+    return res.send("Your review was published successfully")
 
 });
 
